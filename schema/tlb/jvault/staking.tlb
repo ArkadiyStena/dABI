@@ -1,0 +1,21 @@
+// common
+
+address_list$_ _:(HashmapE 267 Bit) = AddressList;  // user_address (MsgAddressStd) -> nothing (int1)
+
+
+// staking_pool
+
+reward_jettons$_
+    _:(HashmapE 267 [distributed_rewards: uint256 rewards_deposits:(HashmapE 32 [distribution_speed:Coins start_time:uint32 end_time:uint32])])
+= RewardJettons;  // key is pool's jetton wallet address
+
+lock_periods$_ _:(HashmapE 32 [cur_tvl:Coins tvl_limit:Coins
+                  reward_multiplier:uint16 deposit_commission:uint16
+                  unstake_commission:uint16 minter_address:MsgAddressStd]) = LockPeriods;
+
+
+// stake wallet
+
+rewards_dict$_ _:(HashmapE 267 [last_distributed_rewards:uint256 unclaimed_rewards:Coins]) = RewardsDict;  // key is pool's jetton wallet address
+
+unstake_requests$_ _:(HashmapE 32 Coins) = UnstakeRequests;  // request_time -> jettons_to_unstake
